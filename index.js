@@ -3,20 +3,32 @@ window.onload = function () {
     // Definitions
     var canvas = document.getElementById("paint-canvas");
     var context = canvas.getContext("2d");
+
+    var canvas2 = document.getElementById("image-canvas");
+    var context2 = canvas2.getContext("2d");
+
     var boundings = canvas.getBoundingClientRect();
+
+    const toolbar = document.getElementById('toolbar');
+    const line = document.getElementById('lineWidth');
+    const colorV = document.getElementById('stroke');
   
     // Specifications
     var mouseX = 0;
     var mouseY = 0;
-    context.strokeStyle = 'black'; // initial brush color
-    context.lineWidth = 1; // initial brush width
+    context.strokeStyle = colorV.value; // initial brush color
+    context.lineWidth = line.value; // initial brush width
     var isDrawing = false;
     var isDragging = false;
     var tool = 1;
 
+    let strokes = [];
+    let strokeIndex =0;
+    let lineNumber = 0;
+
     let sources = [];
-    sources.push({x:100, y:30, width:200, height: 200, src:'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg', img:""});
-    sources.push({x:350, y:55, width:200, height: 200, src:'http://www.html5canvastutorials.com/demos/assets/yoda.jpg', img:""});
+    // sources.push({x:100, y:30, width:200, height: 200, src:'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg', img:""});
+    // sources.push({x:350, y:55, width:200, height: 200, src:'http://www.html5canvastutorials.com/demos/assets/yoda.jpg', img:""});
 
     let current_image = null;
   
@@ -32,6 +44,7 @@ window.onload = function () {
         for(var i in sources) {
             // console.log(sources[i].src);
           images[i] = new Image();
+          images[i].crossOrigin = "anonymous";
           images[i].onload = function() {
             if(++loadedImages >= numImages) {
               callback(images);
@@ -58,25 +71,84 @@ window.onload = function () {
     let drawImages = function(){
         for( let i =0; i<sources.length; i++){
             //console.log(sources[i].img);
-            context.drawImage(sources[i].img, sources[i].x, sources[i].y, sources[i].width, sources[i].height);
+            context2.drawImage(sources[i].img, sources[i].x, sources[i].y, sources[i].width, sources[i].height);
 
         }
+    }
+
+    let drawStrokes = function(){
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      let sty = context.strokeStyle;
+      let wid = context.lineWidth;
+      let tempStrokes = strokes;
+      let j = 0;
+      //console.log(strokes);
+       for( let i =0; i<strokes.length; i++){
+          if(strokes[i].index ==0){
+            // Start Drawing
+            context.strokeStyle = strokes[i].strokeStyle; 
+            context.lineWidth = strokes[i].lineWidth; 
+            console.log(strokes[i].lineWidth);
+            
+            context.beginPath();
+            context.moveTo(strokes[i].x, strokes[i].y);
+          }
+          else if(strokes[i].index >0){
+            context.strokeStyle = strokes[i].strokeStyle; 
+            context.lineWidth = strokes[i].lineWidth; 
+            context.lineTo(strokes[i].x, strokes[i].y);
+            context.stroke();
+            //context.closePath();
+          }
+          else{
+            
+          }
+       }
+       context.strokeStyle =sty;
+       context.lineWidth =wid;
+     
     }
 
   
     // Handle Colors
     var colors = document.getElementsByClassName('colors')[0];
   
-    colors.addEventListener('click', function(event) {
-      context.strokeStyle = event.target.value || 'black';
-    });
+    // colors.addEventListener('click', function(event) {
+    //   context.strokeStyle = event.target.value || 'black';
+    // });
   
-    // Handle Brushes
-    var brushes = document.getElementsByClassName('brushes')[0];
+    // // Handle Brushes
+    // var brushes = document.getElementsByClassName('brushes')[0];
   
-    brushes.addEventListener('click', function(event) {
-      context.lineWidth = event.target.value || 1;
-    });
+    // brushes.addEventListener('click', function(event) {
+    //   context.lineWidth = event.target.value || 1;
+    // });
+
+    toolbar.addEventListener('change', e => {
+      //console.log(e.target.value);
+      if(e.target.id === 'stroke') {
+        
+        context.strokeStyle = e.target.value;
+        console.log(context.strokeStyle);
+      }
+  
+      if(e.target.id === 'lineWidth') {
+        
+          context.lineWidth = e.target.value;
+          console.log(context.lineWidth );
+      }
+      if(e.target.id === 'file_input'){
+        var URL = window.webkitURL || window.URL;
+        var url = URL.createObjectURL(e.target.files[0]);
+        var img = new Image();
+        img.src = url;
+        sources.push({x:100, y:30, width:200, height: 200, src:url, img:""});
+
+        loadImages(sources,function(images){});
+        
+      }
+      
+  });
 
     // Handle Tools
     var tools = document.getElementsByClassName('tools')[0];
@@ -108,8 +180,12 @@ window.onload = function () {
         isDrawing = true;
   
         // Start Drawing
-        context.beginPath();
-        context.moveTo(mouseX, mouseY);
+        // context.beginPath();
+        // context.moveTo(mouseX, mouseY);
+        strokeIndex =0;
+        lineNumber++;
+        strokes.push({index: strokeIndex, lineNumber:lineNumber, strokeStyle: context.strokeStyle, lineWidth: context.lineWidth, x: mouseX, y: mouseY
+        })
       }
       if(tool ==2){
         isDragging = true;
@@ -129,8 +205,12 @@ window.onload = function () {
       setMouseCoordinates(event);
   
       if(isDrawing){
-        context.lineTo(mouseX, mouseY);
-        context.stroke();
+        strokeIndex++;
+        strokes.push({index: strokeIndex, lineNumber:lineNumber, strokeStyle: context.strokeStyle, lineWidth: context.lineWidth, x: mouseX, y: mouseY
+        })
+        // context.lineTo(mouseX, mouseY);
+        // context.stroke();
+        //drawStrokes();
       }
       if(isDragging)
       {
@@ -141,16 +221,23 @@ window.onload = function () {
 
             sources[current_image].x = mouseX - sources[current_image].width/2;
             sources[current_image].y = mouseY - sources[current_image].height /2;
-            drawImages();
+            context2.clearRect(0, 0, canvas.width, canvas.height);
+            //drawImages();
+            
         }
         
       }
-
+      drawImages();
+      drawStrokes();
+      
     });
   
     // Mouse Up Event
     canvas.addEventListener('mouseup', function(event) {
       setMouseCoordinates(event);
+      // strokeIndex=-1;
+      //   strokes.push({index: strokeIndex, strokeStyle: context.strokeStyle, lineWidth: context.lineWidth = 1, x: mouseX, y: mouseY
+      //   })
       isDrawing = false;
       isDragging = false;
       current_image = null;
@@ -167,14 +254,34 @@ window.onload = function () {
   
     clearButton.addEventListener('click', function() {
       context.clearRect(0, 0, canvas.width, canvas.height);
+      context2.clearRect(0, 0, canvas.width, canvas.height);
+      sources =[];
+      strokes =[];
     });
   
     // Handle Save Button
     var saveButton = document.getElementById('save');
   
+    var overlayCanvases = function(cnv1, cnv2) {
+      var newCanvas = document.createElement('canvas'),
+          ctx = newCanvas.getContext('2d'),
+          width = cnv1.width,
+          height = cnv1.height;
+  
+      newCanvas.width = width;
+      newCanvas.height = height;
+  
+      [cnv1, cnv2].forEach(function(n) {
+          ctx.beginPath();
+          ctx.drawImage(n, 0, 0, width, height);
+      });
+  
+      return newCanvas.toDataURL();
+  };
+
     saveButton.addEventListener('click', function() {
       var imageName = prompt('Please enter image name');
-      var canvasDataURL = canvas.toDataURL();
+      var canvasDataURL = overlayCanvases(canvas2,canvas);//canvas2.toDataURL() + canvas.toDataURL();
       var a = document.createElement('a');
       a.href = canvasDataURL;
       a.download = imageName || 'drawing';
@@ -184,7 +291,7 @@ window.onload = function () {
     var loadButton = document.getElementById('load');
 
     loadButton.addEventListener('click', function(){
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        context2.clearRect(0, 0, canvas.width, canvas.height);
         drawImages();
     })
 
