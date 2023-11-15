@@ -2,28 +2,39 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href='style.css' rel='stylesheet'>
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <title>Media</title>
     </head>
     <body>
         <script src='index.js' type='text/javascript'></script>
         <main>
             <div id='toolbar' class="left-block">
-           
-            <label for="stroke">Stroke</label>
-            <input id="stroke" name='stroke' type="color">
-            <label for="lineWidth">Line Width</label>
-            <input id="lineWidth" name='lineWidth' type="number" value="5">
-            <div class="tools">
-                <button type="button" value="1">draw</button>
-                <button type="button" value="2">drag</button>
-            </div>
-            <div class="buttons">
-                <button id="clear"  type="button">Clear</button>
-                <button id="save" type="button">Save</button>
+                <div class="flex-group">
+                    <label for="stroke">Stroke</label>
+                    <input id="stroke" name='stroke' type="color">
+                </div>
+
+                <div class="flex-group">
+                    <label for="lineWidth">Line Width</label>
+                    <input id="lineWidth" name='lineWidth' type="number" value="5">
+                </div>
                 
-                <input type="file" id="file_input">
-            </div>
+                
+                <div class="tools flex-group">
+                    <button type="button" class="fa-solid fa-paintbrush fa-2xl" id="paint" value="1"></button>
+                    <button type="button" class="fa-solid fa-up-down-left-right fa-2xl" id="drag" value="2"></button>
+                </div>
+                <div class="flex-group">
+                    <button id="clear"  type="button">Clear</button>
+                    <button id="save" type="button">Save</button>
+                    
+                    
+                </div>
+                <div class="flex-group">
+                    <input type="file" id="file_input">
+                </div>
+                
             </div>
             <div class="right-block">
                 <canvas id="image-canvas" width="1000" height="1000"></canvas>

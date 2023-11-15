@@ -12,6 +12,8 @@ window.onload = function () {
     const toolbar = document.getElementById('toolbar');
     const line = document.getElementById('lineWidth');
     const colorV = document.getElementById('stroke');
+    const paintBtn = document.getElementById('paint');
+    const dragBtn = document.getElementById('drag');
   
     // Specifications
     var mouseX = 0;
@@ -31,6 +33,27 @@ window.onload = function () {
     // sources.push({x:350, y:55, width:200, height: 200, src:'http://www.html5canvastutorials.com/demos/assets/yoda.jpg', img:""});
 
     let current_image = null;
+
+    switchActive();
+
+    function switchActive(){
+      if(tool==1){
+          
+        // paintBtn.classList.add("fa-beat");
+        // dragBtn.classList.remove("fa-beat");
+        paintBtn.classList.add("active");
+        dragBtn.classList.remove("active");
+        
+      }
+      if(tool==2){
+        console.log(tool);
+        paintBtn.classList.remove("active");
+        dragBtn.classList.add("active");
+        // dragBtn.classList.add("fa-beat");
+        // paintBtn.classList.remove("fa-beat");
+        
+      }
+    };
   
     function loadImages(sources, callback) {
         var images = {};
@@ -155,6 +178,8 @@ window.onload = function () {
   
     tools.addEventListener('click', function(event) {
         tool = event.target.value || 1;
+
+        switchActive();
       });
 
     let isMouseInImage = function(x,y,source)
