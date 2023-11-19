@@ -10,29 +10,74 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         <script src='index.js' type='text/javascript'></script>
         <main>
             <div id='toolbar' class="left-block">
-                <div class="flex-group">
-                    <label for="stroke">Stroke</label>
-                    <input id="stroke" name='stroke' type="color">
+                <div class="flex-group flex-col">
+                    <h2>Generator</h2>
+                    <div class="sub-flex-group">
+                       <button type="button" class="sub-flex-group"  value="1"><i class="fa-solid sub-flex-element" ></i><p>Imagine</p></button>
+                        <button type="button" class="sub-flex-group"  value="2"><i class="fa-solid sub-flex-element" ></i><p>Autofill</p></button>
+                        <button type="button" class="sub-flex-group"  value="3"><i class="fa-solid sub-flex-element" ></i><p>Edit</p></button> 
+                    </div>
+                    <div class="sub-flex-group" >
+                        <textarea class="sub-flex-element" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
+                    </div>
+
+                    <button id="generate" class="fa-solid " type="button">Generate</button>
+
+                    <div class="sub-flex-group center" >
+                        <p class="center" style="display: flex;">Negative prompt</p>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                            
+                          </label>
+                          
+                    </div>
+                    
+                    
+
                 </div>
 
-                <div class="flex-group">
-                    <label for="lineWidth">Line Width</label>
-                    <input id="lineWidth" name='lineWidth' type="number" value="5">
+                <div class="flex-group flex-col">
+                    <h2> Drawing</h2>
+                    <div class="sub-flex-group grey">
+                        <button type="button" class="sub-flex-group" id="paint" value="1"> <p>Draw</p></button>
+                        <!-- <i class="fa-solid fa-paintbrush fa-2xl"></i> -->
+
+                        
+                        <button type="button" class="sub-flex-group" id="erase" value="3"><p>Erase</p></button>
+                        <!-- <i class="fa-solid fa-eraser fa-2xl"></i> -->
+                    </div>
+                    <div class="sub-flex-group grey">
+                        <label class="sub-flex-element" for="lineWidth">Brush Width</label>
+                        <input class="sub-flex-element" id="lineWidth" name='lineWidth' type="number" value="5">
+                    </div>
+
+                    <div class="sub-flex-group grey">
+                        <label class="sub-flex-element" for="stroke">Brush Color</label>
+                        <input class="sub-flex-element" id="stroke" name='stroke' type="color">
+                    </div>
                 </div>
                 
+
                 
-                <div class="tools flex-group">
-                    <button type="button" class="fa-solid fa-paintbrush fa-2xl" id="paint" value="1"></button>
-                    <button type="button" class="fa-solid fa-up-down-left-right fa-2xl" id="drag" value="2"></button>
-                </div>
-                <div class="flex-group">
-                    <button id="clear"  type="button">Clear</button>
-                    <button id="save" type="button">Save</button>
+                
+                
+                
+               
+                <div class="flex-group flex-col">
+                    <h2>Image</h2>
+                    <div class="sub-flex-group grey">
+                        <label for="file_input"  class="custom-file-upload">Upload image</label>
+                        <input type="file" id="file_input">
+
+                        
+                        <button class="sub-flex-group center" id="remove" type="button">Remove</button>
+                    </div>
+                    <div class="sub-flex-group grey">
+                        <button type="button" class="sub-flex-group center" id="drag" value="2"><p>Drag</p></button> 
+                        <!-- <i class="fa-solid fa-up-down-left-right fa-2xl"></i> -->
+                    </div>
                     
-                    
-                </div>
-                <div class="flex-group">
-                    <input type="file" id="file_input">
                 </div>
                 
             </div>
@@ -41,6 +86,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                 <canvas id="paint-canvas" width="1000" height="1000"></canvas>
                 
             
+            </div>
+            <div class="flex-group max">
+                <button id="clear"  type="button">Clear</button>
+                <button id="save" type="button">Save</button>
+                
+                
             </div>
         </main>
 

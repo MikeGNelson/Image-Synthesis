@@ -1,6 +1,7 @@
 
 html{
   background-color: #000000;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
 }
   
   main {
@@ -15,7 +16,7 @@ html{
   .left-block {
     width: auto;
     border-right: 1px solid #e0e0e0;
-    background-color: #333333;
+    background-color: #141414;
     color: white;
     display: flex;
     flex-direction: column;
@@ -28,7 +29,7 @@ html{
   }
   
   #toolbar button {
-    background-color: #1565c0;
+    background-color: #6032cb;
     border: none;
     border-radius: 4px;
     height: 50px;
@@ -36,11 +37,7 @@ html{
     padding: 2px;
 }
 
-#toolbar *{
-  margin-top: 20px;
-  margin-right: 20px;
-  margin-left: 20px;
-}
+
   
   .buttons {
     height: 80px;
@@ -107,6 +104,58 @@ html{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: #383737;
+    padding: 20px;
+
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .sub-flex-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #141414 !important;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+  .grey{
+    background-color: #494949 !important;
+  }
+
+  .sub-flex-group textarea{
+    background-color: #383737;
+    color: white;
+    border: none;
+  }
+
+
+
+  .sub-flex-group button{
+    background-color: #141414 ;
+    padding: 20px !important;
+    margin: 5px;
+
+  }
+
+  .sub-flex-group input{
+    background-color: #494949;
+    color: white;
+    border: none;
+  }
+
+  .sub-flex-group button:active{
+    background-color: #494949 !important;
+  }
+
+  .sub-flex-element{
+    margin: 5px;
+  }
+
+  .flex-col {
+    flex-direction: column;
   }
 
   .flex-group *{
@@ -114,5 +163,87 @@ html{
   }
 
   .active{
-    background-color: coral !important;
+    background-color: #494949 !important;
   }
+
+  .center{
+    justify-content: center;
+  }
+
+  input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.max{
+  max-height: 200px;
+}
+
+
+ /* The switch - the box around the slider */
+ .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #6032cb;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #6032cb;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
