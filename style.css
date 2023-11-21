@@ -1,7 +1,7 @@
 
 html{
   background-color: #000000;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+  font-family:  Arial, Helvetica, sans-serif;
 }
   
   main {
@@ -10,7 +10,7 @@ html{
     margin: 0 auto;
     display: flex;
     flex-grow: 1;
-    background-color: rgb(135, 135, 135);
+    background-color: #141414;
   }
   
   .left-block {
@@ -29,7 +29,7 @@ html{
   }
   
   #toolbar button {
-    background-color: #6032cb;
+    background-color: #6540AF;
     border: none;
     border-radius: 4px;
     height: 50px;
@@ -122,7 +122,7 @@ html{
   }
 
   .grey{
-    background-color: #494949 !important;
+    background-color: #2B2E35 !important;
   }
 
   .sub-flex-group textarea{
@@ -141,13 +141,13 @@ html{
   }
 
   .sub-flex-group input{
-    background-color: #494949;
+    background-color: #2B2E35;
     color: white;
     border: none;
   }
 
   .sub-flex-group button:active{
-    background-color: #494949 !important;
+    background-color: #383737 !important;
   }
 
   .sub-flex-element{
@@ -163,7 +163,7 @@ html{
   }
 
   .active{
-    background-color: #494949 !important;
+    background-color: #383737 !important;
   }
 
   .center{
@@ -226,11 +226,11 @@ html{
 }
 
 input:checked + .slider {
-  background-color: #6032cb;
+  background-color: #6540AF;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #6032cb;
+  box-shadow: 0 0 1px #6540AF;
 }
 
 input:checked + .slider:before {

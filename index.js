@@ -25,7 +25,7 @@ window.onload = function () {
     context.lineWidth = line.value; // initial brush width
     var isDrawing = false;
     var isDragging = false;
-    var tool = 0;
+    var tool = 1;
 
     let strokes = [];
     let strokeIndex =0;
