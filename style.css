@@ -149,6 +149,8 @@ html{
 
   .sub-flex-group button:active{
     background-color: #383737 !important;
+    border: 4px;
+    border-color: #6540AF;
   }
 
   .sub-flex-element{

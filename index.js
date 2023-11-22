@@ -16,7 +16,9 @@ window.onload = function () {
     const dragBtn = document.getElementById('drag');
     const eraseBtn = document.getElementById('erase');
     const removeBtn = document.getElementById('remove');
-    eraseBtn
+    const generateBtn = document.getElementById('generate');
+    const promptTxt = document.getElementById('prompt');
+    
   
     // Specifications
     var mouseX = 0;
@@ -32,6 +34,13 @@ window.onload = function () {
     let lineNumber = 0;
 
     let sources = [];
+
+    let selectedRegion = {
+      x:0,
+      y:0,
+      width:0,
+      height:0
+    }
     // sources.push({x:100, y:30, width:200, height: 200, src:'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg', img:""});
     // sources.push({x:350, y:55, width:200, height: 200, src:'http://www.html5canvastutorials.com/demos/assets/yoda.jpg', img:""});
 
@@ -125,7 +134,7 @@ window.onload = function () {
             // Start Drawing
             context.strokeStyle = strokes[i].strokeStyle; 
             context.lineWidth = strokes[i].lineWidth; 
-            console.log(strokes[i].lineWidth);
+            // console.log(strokes[i].lineWidth);
             
             context.beginPath();
             context.moveTo(strokes[i].x, strokes[i].y);
@@ -198,20 +207,23 @@ window.onload = function () {
 
 
     dragBtn.addEventListener('click', function(event) {
-          tool = event.target.value || 1;
+          console.log("drag")
+          tool = 2;
   
           switchActive();
         });
 
     
     paintBtn.addEventListener('click', function(event) {
-        tool = event.target.value || 1;
+        console.log("paint")
+        tool = 1;
 
         switchActive();
       });
 
     eraseBtn.addEventListener('click', function(event) {
-        tool = event.target.value || 1;
+        console.log("erase")
+        tool = 3;
 
         switchActive();
       });
@@ -378,6 +390,43 @@ window.onload = function () {
     //     drawImages();
     // })
 
+    generateBtn.addEventListener('click', async function(e){
+      var data = new FormData()
+      
+      var canvasDataURL = overlayCanvases(canvas2,canvas);
+      const blob = await (await fetch(canvasDataURL)).blob(); 
+
+      data.append('prompt', promptTxt.value)
+      data.append('image', canvasDataURL)
+      // console.log(data)
+      const response = await fetch('http://127.0.0.1:5000//getImage', {
+        method: 'POST',
+        mode: 'cors',
+        body: data, // string or object
+        headers: {
+          'Access-Control-Allow-Origin': "*"
+        }
+      });
+      const imageBlob = await response.blob(); //extract JSON from the http response
+      console.log(imageBlob)
+      var URL = window.webkitURL || window.URL;
+      var url = URL.createObjectURL(imageBlob);
+      var img = new Image();
+      console.log(img)
+      img.src = url;
+      sources.push({x:100, y:30, width:200, height: 200, src:url, img:""});
+
+      loadImages(sources,function(images){});
+      // document.body.appendChild(img);
+      // do something with myJson
+    }
+
+    );
+    // const getTransform = async () => {
+
+
+      
+    // }
 
   };
   

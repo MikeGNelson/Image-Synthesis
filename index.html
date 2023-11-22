@@ -18,7 +18,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                         <button type="button" class="sub-flex-group"  value="3"><i class="fa-solid sub-flex-element" ></i><p>Edit</p></button> 
                     </div>
                     <div class="sub-flex-group" >
-                        <textarea class="sub-flex-element" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
+                        <textarea id="prompt" class="sub-flex-element" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
                     </div>
 
                     <button id="generate" class=" " type="button">Generate</button>
@@ -32,6 +32,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                           </label>
                           
                     </div>
+                    
                     
                     
 
@@ -95,5 +96,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
             </div>
         </main>
 
+        <!-- <form action="http://127.0.0.1:5000//submit" method="post" enctype="multipart/form-data">
+            <label for="text">Enter text:</label><br>
+            <input type="text" id="text" name="text"><br><br>
+            
+            <label for="image">Upload image:</label><br>
+            <input type="file" id="image" name="image"><br><br>
+            
+            <input type="submit" value="Submit">
+        </form> -->
     </body>
 </html>
