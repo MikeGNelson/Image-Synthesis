@@ -1,7 +1,7 @@
 
 html{
   background-color: #000000;
-  font-family:  Arial, Helvetica, sans-serif;
+  font-family:  system-ui, Helvetica, sans-serif;
 }
   
   main {
@@ -29,7 +29,7 @@ html{
   }
   
   #toolbar button {
-    background-color: #6540AF;
+    background-color: #2B2E35;
     border: none;
     border-radius: 4px;
     height: 50px;
@@ -104,7 +104,7 @@ html{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #383737;
+    background-color: #24272E;
     padding: 20px;
 
     margin-top: 20px;
@@ -116,29 +116,73 @@ html{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #141414 !important;
+    /*background-color: #141414 !important;*/
     margin-bottom: 20px;
+    border-radius: 5px;
     align-items: center;
   }
 
+
+
   .grey{
     background-color: #2B2E35 !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
   }
 
+  .purple{
+    background-color: #6540AF !important;
+  }
+
+  ::placeholder {
+    color: #BFC0C2;
+  }
+  .center{
+    background-color: #24272E;
+    display: flex;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+
+  #remove{
+    margin-bottom: 20px;
+  }
   .sub-flex-group textarea{
-    background-color: #383737;
-    color: white;
-    border: none;
+    background-color: #24272E;
+    border-color: #BFC0C2;
+    border-radius: 5px;
+    border-width: 3px;
   }
 
+  #paint {
+    text-align: left;
+    background-color: none;
+  }
 
+  .drawing-buttons{
+    display: flex;
+    
+
+  }
 
   .sub-flex-group button{
-    background-color: #141414 ;
+    /*background-color: #141414 ;*/
     padding: 20px !important;
     margin: 5px;
     border-radius: 5px;
+    display: flex;
 
+  }
+
+  .sub-flex-group2{
+    background-color: none;
+  }
+
+  .sub-flex-group img{
+    margin-right: 10px;
   }
 
   .sub-flex-group input{
@@ -148,6 +192,7 @@ html{
   }
 
   .sub-flex-group button:active{
+<<<<<<< HEAD
     background-color: #383737 !important;
     border: 4px;
     border-color: #6540AF;
@@ -155,8 +200,15 @@ html{
 
   .sub-flex-element{
     margin: 5px;
+=======
+    background-color:#2B2E35 !important;
   }
 
+  .center{
+    text-align: left;
+    display: flex;
+>>>>>>> shadow-wizard-money-gang
+  }
   .flex-col {
     flex-direction: column;
   }
@@ -168,8 +220,8 @@ html{
   .active{
     background-color: #1b1b1c !important;
     border: 4px;
-    border-color: #6540AF;
-    
+    border-color: #6540AF !important;
+    border-style: solid !important; 
   }
 
   .center{
@@ -181,20 +233,32 @@ html{
 }
 
 .custom-file-upload {
-  display: inline-block;
-  padding: 6px 12px;
+  display: flex;
+  align-content: left;
   cursor: pointer;
+  background-color: #2B2E35;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .max{
   max-height: 200px;
 }
 
+.image-buttons{
+  display: inline-flex;
+  background-color: #2B2E35;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  text-align:center;
+}
 
  /* The switch - the box around the slider */
  .switch {
   position: relative;
   display: inline-block;
+  margin-top: 16px;
+  margin-bottom: 16px;
   width: 60px;
   height: 34px;
 }
