@@ -4,30 +4,27 @@
         <link href='style.css' rel='stylesheet'>
         <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <title>Media</title>
+        <title>Image Synthesis</title>
     </head>
     <body>
         <script src='index.js' type='text/javascript'></script>
         <main>
             <div id='toolbar' class="left-block">
                 <div class="flex-group flex-col">
-                    <h2>Generator</h2>
                     <div class="sub-flex-group">
-<<<<<<< HEAD
-                       <button type="button" class="sub-flex-group"  value="1"><img src="images/Imagine_Icon.svg"><p>Imagine</p></button>
-                        <button type="button" class="sub-flex-group"  value="2"><img src="images/Autofill_Icon.svg"></i><p>Autofill</p></button>
-                        <button type="button" class="sub-flex-group" id="select" value="3"><img src="images/Edit_Icon.svg"><p>Edit</p></button> 
+                        <h2>Generator</h2>
+                        <div class="flex-group max">
+                            <button id="save" type="button"><p>Save</p></button>
+                            <button id="clear"  type="button"><p>Clear</p></button>
+                        </div>
                     </div>
-                    <div class="sub-flex-group" >
-                        <textarea id="prompt" class="sub-flex-element" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
-=======
-                       <button type="button" class="sub-flex-group active"  value="1"><img src="images/Imagine_Icon.svg" width="20px" height="20px"><p>Imagine</p></button>
+                    <div class="sub-flex-group">
+                       <button type="button" id="imagine" class="sub-flex-group active"  value="1"><img src="images/Imagine_Icon.svg" width="30px" height="30px"><p>Imagine</p></button>
                         <button type="button" class="sub-flex-group"  value="2"><img src="images/Autofill_Icon.svg" width="20px" height="20px"></i><p>Autofill</p></button>
-                        <button type="button" class="sub-flex-group"  value="3"><img src="images/Edit_Icon.svg" width="17px" height="17px"><p>Edit</p></button> 
+                        <button id="select" type="button" class="sub-flex-group"  value="3"><img src="images/Edit_Icon.svg" width="17px" height="17px"><p>Edit</p></button> 
                     </div>
                     <div class="sub-flex-group prompt" >
-                        <textarea class="sub-flex-element" style="padding-left: 10px; padding-top: 10px;" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
->>>>>>> shadow-wizard-money-gang
+                        <textarea class="sub-flex-element" id="generate" style="padding-left: 10px; padding-top: 10px;" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
                     </div>
 
                     
@@ -41,26 +38,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                           
                     </div>
                     
-<<<<<<< HEAD
-                    
-                    
-=======
                     <button id="generate" class="purple" type="button">Generate</button>
->>>>>>> shadow-wizard-money-gang
 
                 </div>
 
                 <div class="flex-group flex-col">
                     <h2> Drawing</h2>
-<<<<<<< HEAD
                     <div class="sub-flex-group grey">
-                        <button type="button" class="sub-flex-group" id="paint" value="1"> <img src="images/Draw_Icon.svg"></img> <p>Draw</p></button>
+                        <button type="button" class="sub-flex-group"  id="paint" value="1"> <img src="images/Draw_Icon.svg" width="30px" height="30px"></img> <p>Draw</p></button>
                         
-=======
-                    <div class="drawing-buttons">
-                        <button type="button" class="sub-flex-group" id="paint" value="1" style="margin-right: 10px;"><img src="images/Draw_Icon.svg" width="30" height="30"> <p>Draw</p></button>
-                        <!-- <i class="fa-solid fa-paintbrush fa-2xl"></i> -->
->>>>>>> shadow-wizard-money-gang
 
                         
                         <button type="button" class="sub-flex-group" id="erase" value="3" style="margin-left: 10px;"><img src="images/Erase_Icon.svg" width="30" height="30"><p>Erase</p></button>
@@ -72,7 +58,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                     </div>
 
                     <div class="sub-flex-group grey">
-                        <label class="sub-flex-element" for="stroke" style="padding-left: 10px;">Brush Color</label>
+                        <label class="sub-flex-group" height="50px" for="stroke" style="padding-left: 10px;">Brush Color</label>
                         <input class="sub-flex-element" id="stroke" name='stroke' type="color" style="padding-right: 10px;">
                     </div>
                 </div>
@@ -85,15 +71,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                
                 <div class="flex-group flex-col">
                     <h2>Image</h2>
-                    <div class="drawing-buttons">
-                        <label for="file_input"  class="image-buttons"><img src="images/Importimage_Icon.svg" width="30px" height="30px" style="display: flex;">Upload</label>
+                    <div class="drawing-buttons sub-flex-group grey" height="50px">
+                        <label for="file_input"  class="image-buttons"><img src="images/Importimage_Icon.svg" width="30px" height="30px" style="display: flex;"><p>Upload</p></label>
                         <input type="file" id="file_input">
 
                         
-                        <button class="\" id="remove" type="button">Remove</button>
+                        <button class="sub-flex-group" id="remove" type="button"><img src="images/Erase_Icon.svg" width="30px" height="30px"><p>Remove</p></button>
                     </div>
-                    <div class="drawing-buttons">
-                        <button type="button" class="\" id="drag" value="2"><p>Drag</p></button> 
+                    <div class="drawing-buttons sub-flex-group">
+                        <button type="button" class="sub-flex-group" id="drag" value="2"><img src="images/all-directions.png" style="max-width: 30px;"><p>Drag</p></button> 
+
+                        <button type="button" class="sub-flex-group" id="other" value="2"><img src="images/all-directions.png" style="max-width: 30px;"><p>other</p></button> 
+                        <!-- <i clas
                         <!-- <i class="fa-solid fa-up-down-left-right fa-2xl"></i> -->
                     </div>
                     
@@ -103,15 +92,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
             <div class="right-block">
                 <canvas id="image-canvas" width="1000" height="1000"></canvas>
                 <canvas id="paint-canvas" width="1000" height="1000"></canvas>
+                <canvas id="select-canvas" width="1000" height="1000"></canvas>
                 
             
             </div>
-            <div class="flex-group max">
-                <button id="clear"  type="button">Clear</button>
-                <button id="save" type="button">Save</button>
-                
-                
-            </div>
+            
         </main>
 
         <!-- <form action="http://127.0.0.1:5000//submit" method="post" enctype="multipart/form-data">

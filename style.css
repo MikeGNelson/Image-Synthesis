@@ -88,6 +88,12 @@ html{
     background-color: transparent;
   }
 
+  #select-canvas {
+    cursor:crosshair;
+    background-color: transparent;
+  }
+
+
   .right-block > canvas {
     position: absolute;
     top: 5px;
@@ -105,7 +111,7 @@ html{
     flex-direction: row;
     justify-content: space-between;
     background-color: #24272E;
-    padding: 20px;
+    padding: 10px;
 
     margin-top: 20px;
     margin-right: 20px;
@@ -139,6 +145,22 @@ html{
 
   ::placeholder {
     color: #BFC0C2;
+  }
+
+  #clear{
+    padding-top: 3px !important;
+    border-color: #BFC0C2 !important;
+    border-radius: 5px !important;
+    border-style: solid !important;
+    background-color: #24272E !important;
+  }
+
+  #clear:hover{
+    background-color: cornflowerblue  !important;
+  }
+
+  #save{
+    padding-top: 3px !important;
   }
   .center{
     background-color: #24272E;
@@ -192,22 +214,12 @@ html{
   }
 
   .sub-flex-group button:active{
-<<<<<<< HEAD
-    background-color: #383737 !important;
-    border: 4px;
-    border-color: #6540AF;
-  }
-
-  .sub-flex-element{
-    margin: 5px;
-=======
     background-color:#2B2E35 !important;
   }
 
   .center{
     text-align: left;
     display: flex;
->>>>>>> shadow-wizard-money-gang
   }
   .flex-col {
     flex-direction: column;
@@ -246,11 +258,18 @@ html{
 }
 
 .image-buttons{
-  display: inline-flex;
+  display: flex;
   background-color: #2B2E35;
   margin-bottom: 20px;
   margin-right: 20px;
   text-align:center;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.image-buttons:hover{
+  background-color: cornflowerblue;
 }
 
  /* The switch - the box around the slider */
