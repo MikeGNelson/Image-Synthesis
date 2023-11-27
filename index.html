@@ -9,7 +9,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     <body>
         <script src='index.js' type='text/javascript'></script>
         <main>
-            <div id='toolbar' class="left-block">
+            <div id='toolbar' class="toolbad left-block">
                 <div class="flex-group flex-col">
                     <div class="sub-flex-group">
                         <h2>Generator</h2>
@@ -20,28 +20,45 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                     </div>
                     <div class="sub-flex-group">
                        <button type="button" id="imagine" class="sub-flex-group active"  value="1"><img src="images/Imagine_Icon.svg" width="30px" height="30px"><p>Imagine</p></button>
-                        <button type="button" class="sub-flex-group"  value="2"><img src="images/Autofill_Icon.svg" width="20px" height="20px"></i><p>Autofill</p></button>
+                        <button type="button" id="autofill" class="sub-flex-group"  value="2"><img src="images/Autofill_Icon.svg" width="20px" height="20px"></i><p>Autofill</p></button>
                         <button id="select" type="button" class="sub-flex-group"  value="3"><img src="images/Edit_Icon.svg" width="17px" height="17px"><p>Edit</p></button> 
                     </div>
                     <div class="sub-flex-group prompt" >
-                        <textarea class="sub-flex-element" id="generate" style="padding-left: 10px; padding-top: 10px;" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
+                        <textarea class="sub-flex-element" id="prompt" style="padding-left: 10px; padding-top: 10px;" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
                     </div>
 
                     
                     <div class="center" >
                         <p>Negative prompt</p>
                         <label class="switch">
-                            <input type="checkbox">
+                            <input id="negative" type="checkbox">
                             <span class="slider round"></span>
                             
                           </label>
                           
                     </div>
+
+                    <div class="sub-flex-group prompt" >
+                        <textarea class="sub-flex-element" id="negativeprompt" style="padding-left: 10px; padding-top: 10px;" placeholder="Describe the image you want to generate" cols="15" rows="10"></textarea>
+                    </div>
                     
                     <button id="generate" class="purple" type="button">Generate</button>
 
+                    
+
                 </div>
 
+                
+                
+            </div>
+            <div class="right-block">
+                <canvas id="image-canvas" width="1000" height="1000"></canvas>
+                <canvas id="paint-canvas" width="1000" height="1000"></canvas>
+                <canvas id="select-canvas" width="1000" height="1000"></canvas>
+                
+            
+            </div>
+            <div class="left-block toolbar">
                 <div class="flex-group flex-col">
                     <h2> Drawing</h2>
                     <div class="sub-flex-group grey">
@@ -62,12 +79,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                         <input class="sub-flex-element" id="stroke" name='stroke' type="color" style="padding-right: 10px;">
                     </div>
                 </div>
-                
-
-                
-                
-                
-                
                
                 <div class="flex-group flex-col">
                     <h2>Image</h2>
@@ -81,20 +92,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
                     <div class="drawing-buttons sub-flex-group">
                         <button type="button" class="sub-flex-group" id="drag" value="2"><img src="images/all-directions.png" style="max-width: 30px;"><p>Drag</p></button> 
 
-                        <button type="button" class="sub-flex-group" id="other" value="2"><img src="images/all-directions.png" style="max-width: 30px;"><p>other</p></button> 
+                        <button type="button" class="sub-flex-group" id="scale" value="7"><img src="images/up-right-and-down-left-from-center-solid.svg" style="max-width: 30px;"><p>Scale</p></button> 
                         <!-- <i clas
                         <!-- <i class="fa-solid fa-up-down-left-right fa-2xl"></i> -->
                     </div>
                     
                 </div>
-                
-            </div>
-            <div class="right-block">
-                <canvas id="image-canvas" width="1000" height="1000"></canvas>
-                <canvas id="paint-canvas" width="1000" height="1000"></canvas>
-                <canvas id="select-canvas" width="1000" height="1000"></canvas>
-                
-            
             </div>
             
         </main>

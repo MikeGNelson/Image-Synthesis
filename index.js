@@ -21,10 +21,21 @@ window.onload = function () {
 
   const paintBtn = document.getElementById('paint');
   const dragBtn = document.getElementById('drag');
+  const scaleBtn = document.getElementById('scale');
   const eraseBtn = document.getElementById('erase');
   const removeBtn = document.getElementById('remove');
   const selectBtn = document.getElementById('select');
+  const autoFillBtn = document.getElementById('autofill');
   const imagineBtn = document.getElementById('imagine');
+
+  const negativeSwitch = document.getElementById('negative');
+  const negativeTxt = document.getElementById('negativeprompt');
+  if(negativeSwitch.checked){
+    negativeTxt.classList.remove("hide");
+  }
+  else{
+    negativeTxt.classList.add("hide");
+  }
 
   const generateBtn = document.getElementById('generate');
   const promptTxt = document.getElementById('prompt');
@@ -37,7 +48,7 @@ window.onload = function () {
   context.lineWidth = line.value; // initial brush width
   var isDrawing = false;
   var isDragging = false;
-  var tool = 0;
+  var tool = 6;
 
   let strokes = [];
   let strokeIndex =0;
@@ -74,8 +85,11 @@ window.onload = function () {
       // dragBtn.classList.remove("fa-beat");
       paintBtn.classList.add("active");
       dragBtn.classList.remove("active");
+      scaleBtn.classList.remove("active");
       eraseBtn.classList.remove("active");
       selectBtn.classList.remove("active");
+      imagineBtn.classList.remove("active");
+      autoFillBtn.classList.remove("active");
       selectedRegion.active = false;
       
     }
@@ -83,8 +97,11 @@ window.onload = function () {
       console.log(tool);
       paintBtn.classList.remove("active");
       dragBtn.classList.add("active");
+      scaleBtn.classList.remove("active");
       eraseBtn.classList.remove("active");
       selectBtn.classList.remove("active");
+      imagineBtn.classList.remove("active");
+      autoFillBtn.classList.remove("active");
       selectedRegion.active = false;
       // dragBtn.classList.add("fa-beat");
       // paintBtn.classList.remove("fa-beat");
@@ -94,8 +111,11 @@ window.onload = function () {
       console.log(tool);
       paintBtn.classList.remove("active");
       dragBtn.classList.remove("active");
+      scaleBtn.classList.remove("active");
       eraseBtn.classList.add("active");
       selectBtn.classList.remove("active");
+      imagineBtn.classList.remove("active");
+      autoFillBtn.classList.remove("active");
       selectedRegion.active = false;
       // dragBtn.classList.add("fa-beat");
       // paintBtn.classList.remove("fa-beat");
@@ -105,10 +125,51 @@ window.onload = function () {
       console.log(tool);
       paintBtn.classList.remove("active");
       dragBtn.classList.remove("active");
+      scaleBtn.classList.remove("active");
       eraseBtn.classList.remove("active");
       selectBtn.classList.add("active");
-      selectedRegion.active = true;
       imagineBtn.classList.remove("active");
+      autoFillBtn.classList.remove("active");
+      selectedRegion.active = true;
+      
+    }
+    if(tool==5){
+      console.log(tool);
+      paintBtn.classList.remove("active");
+      dragBtn.classList.remove("active");
+      scaleBtn.classList.remove("active");
+      eraseBtn.classList.remove("active");
+      selectBtn.classList.remove("active");
+      imagineBtn.classList.remove("active");
+      autoFillBtn.classList.add("active");
+      selectedRegion.active = true;
+      
+    }
+    if(tool==6){
+      console.log(tool);
+      paintBtn.classList.remove("active");
+      dragBtn.classList.remove("active");
+      scaleBtn.classList.remove("active");
+      eraseBtn.classList.remove("active");
+      selectBtn.classList.remove("active");
+      imagineBtn.classList.add("active");
+      autoFillBtn.classList.remove("active");
+      selectedRegion.active = true;
+      
+    }
+    if(tool==7){
+      console.log(tool);
+      paintBtn.classList.remove("active");
+      dragBtn.classList.remove("active");
+      scaleBtn.classList.add("active");
+      eraseBtn.classList.remove("active");
+      selectBtn.classList.remove("active");
+      imagineBtn.classList.remove("active");
+      autoFillBtn.classList.remove("active");
+      selectedRegion.active = false;
+      // dragBtn.classList.add("fa-beat");
+      // paintBtn.classList.remove("fa-beat");
+      
     }
   };
 
@@ -269,6 +330,12 @@ window.onload = function () {
         switchActive();
       });
 
+  scaleBtn.addEventListener('click', function(event) {
+        console.log("scale")
+        tool = 7;
+
+        switchActive();
+      });
   
   paintBtn.addEventListener('click', function(event) {
       console.log("paint")
@@ -290,10 +357,17 @@ window.onload = function () {
 
       switchActive();
     });
+  
+  autoFillBtn.addEventListener('click', function(event) {
+      console.log("select")
+      tool = 5;
+
+      switchActive();
+    });
 
   imagineBtn.addEventListener('click', function(event) {
       console.log("select")
-      tool = 0;
+      tool = 6;
 
       switchActive();
     });
@@ -302,6 +376,18 @@ window.onload = function () {
       sources.splice(-1);
       context2.clearRect(0, 0, canvas.width, canvas.height);
     });
+
+  negativeSwitch.addEventListener('click', function(event) {
+    console.log(negativeSwitch.checked);
+    if(negativeSwitch.checked){
+      negativeTxt.classList.remove("hide");
+    }
+    else{
+      negativeTxt.classList.add('hide');
+      negativeTxt.value = "";
+    }
+
+  });
 
   let isMouseInImage = function(x,y,source)
   {
@@ -356,12 +442,20 @@ window.onload = function () {
       strokes.push({index: strokeIndex, lineNumber:lineNumber, strokeStyle: "white", lineWidth: context.lineWidth, x: mouseX, y: mouseY
       })
     }
-    if(tool==4){
+    if(tool==4 || tool==5 || tool==6){
       selectedRegion.selecting = true;
       selectedRegion.x = mouseX;
       selectedRegion.y = mouseY;
       selectedRegion.startX = mouseX;
       selectedRegion.startY = mouseY;
+    }
+    if(tool==7){
+      for( let i =0; i<sources.length; i++){
+        //console.log(mouseX);
+        if(isMouseInImage(mouseX,mouseY, sources[i])){
+            current_image = i;
+        }
+    }
     }
     
   });
@@ -401,7 +495,7 @@ window.onload = function () {
       }
       
     }
-    if(tool==4){
+    if(tool==4 || tool==5 || tool==6){
       if(selectedRegion.selecting){
         
         selectedRegion.width = Math.abs( mouseX - selectedRegion.startX);
@@ -412,6 +506,12 @@ window.onload = function () {
       }
       
     }
+    if(tool==7){
+      sources[current_image].width = mouseX - sources[current_image].x;
+      sources[current_image].height = mouseY - sources[current_image].y;
+      context2.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
     drawSelect();
     drawImages();
     drawStrokes();
@@ -509,6 +609,15 @@ window.onload = function () {
 
     data.append('prompt', promptTxt.value)
     data.append('image', canvasDataURL)
+
+    let mode = "image";
+    if(tool ==5){
+      mode = "autofill";
+    }
+    if(tool ==4){
+      mode = "edit"
+    }
+    data.append('mode', mode) //4 is edit, 5 is autofill, 6 is imagine
     // console.log(data)
     const response = await fetch('http://127.0.0.1:5000//getImage', {
       method: 'POST',
@@ -525,10 +634,10 @@ window.onload = function () {
     var img = new Image();
     console.log(img)
     img.src = url;
-    sources.push({x:100, y:30, width:200, height: 200, src:url, img:""});
+    sources.push({x:selectedRegion.x, y:selectedRegion.y, width:selectedRegion.width, height: selectedRegion.height, src:url, img:""});
 
     loadImages(sources,function(images){});
-    // document.body.appendChild(img);
+    //document.body.appendChild(img);
     // do something with myJson
   }
 
