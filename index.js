@@ -607,8 +607,9 @@ window.onload = function () {
     var canvasDataURL = selectedCanvases(canvas2,canvas);
     //const blob = await (await fetch(canvasDataURL)).blob(); 
 
-    data.append('prompt', promptTxt.value)
-    data.append('image', canvasDataURL)
+    data.append('prompt', promptTxt.value);
+    data.append('negative', negativeTxt.value);
+    data.append('image', canvasDataURL);
 
     let mode = "image";
     if(tool ==5){
@@ -617,7 +618,7 @@ window.onload = function () {
     if(tool ==4){
       mode = "edit"
     }
-    data.append('mode', mode) //4 is edit, 5 is autofill, 6 is imagine
+    data.append('mode', mode); //4 is edit, 5 is autofill, 6 is imagine
     // console.log(data)
     const response = await fetch('http://127.0.0.1:5000//getImage', {
       method: 'POST',
