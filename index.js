@@ -306,12 +306,14 @@ window.onload = function () {
       var img = new Image();
       img.src = url;
       sources.push({x:100, y:30, width:200, height: 200, src:url, img:""});
-
+      console.log(sources);
       loadImages(sources,function(images){});
       
     }
     
 });
+
+
 
   // Handle Tools
   // var tools = document.getElementsByClassName('tools')[0];
@@ -619,7 +621,9 @@ window.onload = function () {
       mode = "edit"
     }
     data.append('mode', mode); //4 is edit, 5 is autofill, 6 is imagine
-    // console.log(data)
+    
+    //https://a0y7hkhemvvd9i-8080.proxy.runpod.net/get_edit
+    //https://rp6luazwsdsz7b-8080.proxy.runpod.net/get_image
     const response = await fetch('http://127.0.0.1:5000//getImage', {
       method: 'POST',
       mode: 'cors',
