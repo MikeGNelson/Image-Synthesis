@@ -622,9 +622,21 @@ window.onload = function () {
 
   generateBtn.addEventListener('click', async function(e){
     var data = new FormData()
+
+    generateBtn.disabled = true;
+
+    var canvasData;
+    var canvasDataURL
+
+    if(selectedRegion.width >=25){
+      canvasData = selectedCanvases(canvas2,canvas);
+      canvasDataURL = crop(canvasData, selectedRegion.x,selectedRegion.y,selectedRegion.width,selectedRegion.height);
+    }
+    else{
+      
+      canvasDataURL = overlayCanvases(canvas2,canvas);
+    }
     
-    var canvasData = selectedCanvases(canvas2,canvas);
-    var canvasDataURL = crop(canvasData, selectedRegion.x,selectedRegion.y,selectedRegion.width,selectedRegion.height);
     //const blob = await (await fetch(canvasDataURL)).blob(); 
 
     data.append('prompt', promptTxt.value);
@@ -632,17 +644,22 @@ window.onload = function () {
     data.append('image', canvasDataURL);
 
     let mode = "image";
+
+    let api = 'https://rp6luazwsdsz7b-8080.proxy.runpod.net/get_image';
     if(tool ==5){
       mode = "autofill";
+      api = 'https://a0y7hkhemvvd9i-8080.proxy.runpod.net/get_edit';
     }
     if(tool ==4){
       mode = "edit"
+      api = 'https://a0y7hkhemvvd9i-8080.proxy.runpod.net/get_edit';
     }
     data.append('mode', mode); //4 is edit, 5 is autofill, 6 is imagine
     
     //https://a0y7hkhemvvd9i-8080.proxy.runpod.net/get_edit
     //https://rp6luazwsdsz7b-8080.proxy.runpod.net/get_image
-    const response = await fetch('http://127.0.0.1:5000//getImage', {
+    //http://127.0.0.1:5000//getImage
+    const response = await fetch(api, {
       method: 'POST',
       mode: 'cors',
       body: data, // string or object
@@ -659,9 +676,22 @@ window.onload = function () {
     //console.log(img)
     img.src = url;
     //img.src = canvasDataURL;
-    sources.push({x:selectedRegion.x, y:selectedRegion.y, width:selectedRegion.width, height: selectedRegion.height, src:url, img:""});
+    if(selectedRegion.width >=25){
+      sources.push({x:selectedRegion.x, y:selectedRegion.y, width:selectedRegion.width, height: selectedRegion.height, src:url, img:""});
+      
+    }
+    else{
+      sources.push({x:0, y:0, width:canvas3.width, height: canvas3.height, src:url, img:""});
+    }
+      
 
     loadImages(sources,function(images){});
+
+    generateBtn.disabled = false;
+
+    drawSelect();
+    drawImages();
+    drawStrokes();
     //document.body.appendChild(img);
     // do something with myJson
   }
