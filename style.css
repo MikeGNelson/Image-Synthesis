@@ -14,13 +14,22 @@ html{
   }
   
   .left-block {
-    width: auto;
+    width: 100%;
+    max-width: 400px;
     /* border-right: 1px solid #e0e0e0; */
     background-color: #141414;
     color: white;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     
+  }
+
+  .left-block::-webkit-scrollbar {
+    display: none;
   }
 
   #lineWidth{
@@ -84,7 +93,7 @@ html{
   
   .right-block {
     width: 1000px;
-    height: 1600px;
+    height: 1100px;
   }
 
   .toolbar button:hover{

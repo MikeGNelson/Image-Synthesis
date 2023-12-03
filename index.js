@@ -573,23 +573,40 @@ window.onload = function () {
   var selectedCanvases = function(cnv1, cnv2) {
     var newCanvas = document.createElement('canvas'),
         ctx = newCanvas.getContext('2d'),
-        width = selectedRegion.width,
-        height = selectedRegion.height;
+        width = cnv1.width,
+        height = cnv1.height;
 
     newCanvas.width = width;
     newCanvas.height = height;
 
     [cnv1, cnv2].forEach(function(n) {
         ctx.beginPath();
-        ctx.drawImage(n, selectedRegion.x, selectedRegion.y, width, height);
+        ctx.drawImage(n, 0, 0, width, height);
     });
 
-    return newCanvas.toDataURL();
+    return newCanvas;
+  };
+
+  var crop = function(canvas, offsetX, offsetY, width, height) {
+    // create an in-memory canvas
+    var buffer = document.createElement('canvas');
+    var b_ctx = buffer.getContext('2d');
+    // set its width/height to the required ones
+    buffer.width = width;
+    buffer.height = height;
+    // draw the main canvas on our buffer one
+    // drawImage(source, source_X, source_Y, source_Width, source_Height, 
+    //  dest_X, dest_Y, dest_Width, dest_Height)
+    b_ctx.drawImage(canvas, offsetX, offsetY, width, height,
+                    0, 0, buffer.width, buffer.height);
+    // now call the callback with the dataURL of our buffer canvas
+    return buffer.toDataURL();
   };
 
   saveButton.addEventListener('click', function() {
     var imageName = prompt('Please enter image name');
     var canvasDataURL = overlayCanvases(canvas2,canvas);//canvas2.toDataURL() + canvas.toDataURL();
+    
     var a = document.createElement('a');
     a.href = canvasDataURL;
     a.download = imageName || 'drawing';
@@ -606,7 +623,8 @@ window.onload = function () {
   generateBtn.addEventListener('click', async function(e){
     var data = new FormData()
     
-    var canvasDataURL = selectedCanvases(canvas2,canvas);
+    var canvasData = selectedCanvases(canvas2,canvas);
+    var canvasDataURL = crop(canvasData, selectedRegion.x,selectedRegion.y,selectedRegion.width,selectedRegion.height);
     //const blob = await (await fetch(canvasDataURL)).blob(); 
 
     data.append('prompt', promptTxt.value);
@@ -632,13 +650,15 @@ window.onload = function () {
         'Access-Control-Allow-Origin': "*"
       }
     });
+
     const imageBlob = await response.blob(); //extract JSON from the http response
-    console.log(imageBlob)
+    //console.log(imageBlob)
     var URL = window.webkitURL || window.URL;
     var url = URL.createObjectURL(imageBlob);
     var img = new Image();
-    console.log(img)
+    //console.log(img)
     img.src = url;
+    //img.src = canvasDataURL;
     sources.push({x:selectedRegion.x, y:selectedRegion.y, width:selectedRegion.width, height: selectedRegion.height, src:url, img:""});
 
     loadImages(sources,function(images){});
