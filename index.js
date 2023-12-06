@@ -645,7 +645,7 @@ window.onload = function () {
 
     let mode = "image";
 
-    let api = 'https://rp6luazwsdsz7b-8080.proxy.runpod.net/get_image';
+    let api = 'https://ztz0rutfap159u-8080proxy.runpod.net/get_image';
     if(tool ==5){
       mode = "autofill";
       api = 'https://a0y7hkhemvvd9i-8080.proxy.runpod.net/get_edit';
